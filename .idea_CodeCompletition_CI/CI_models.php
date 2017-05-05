@@ -11,7 +11,7 @@
  * ---------------------- Models to Load ----------------------
  * <examples>
  *
- * @property Test_m $Test_m
+ * @property Users_m $Users_m
  *
  *
  *

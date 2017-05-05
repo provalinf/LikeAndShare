@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8"/>
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>{{ titre }}</title>
-	<link rel="stylesheet" href="{{ base_url('vendor/zurb/foundation/dist/css/foundation.css') }}" />
-	<script src="{{ base_url('vendor/components/modernizr/modernizr.js') }}"></script>
+	<link rel="stylesheet" href="{{ base_url('components/foundation/css/foundation.min.css') }}"/>
+	<script src="{{ base_url('components/foundation/js/vendor/modernizr.js') }}"></script>
 </head>
 <body>
 
@@ -15,9 +15,9 @@
 {% block contenu %}
 {% endblock %}
 
-<script src="{{ base_url('vendor/components/jquery/jquery.min.js') }}"></script>
+<script src="{{ base_url('components/foundation/js/vendor/jquery.js') }}"></script>
 {#<script src="{{ base_url('assets/Foundation/js/vendor/what-input.min.js') }}"></script>#}
-<script src="{{ base_url('vendor/zurb/foundation/dist/js/foundation.min.js') }}"></script>
+<script src="{{ base_url('components/foundation/js/foundation.min.js') }}"></script>
 <script>
 	$(document).foundation();
 </script>
