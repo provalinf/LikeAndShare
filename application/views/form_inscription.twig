@@ -4,16 +4,16 @@
 		<div class="panel">
 			{{ form_open('Users_c/validFormInscription') }}
 
-			<label for="login">Pseudo</label>
-			<input type="text" name="login" value="{{ set_value('login') }}"/>
+			<label for="login">Pseudo
+			<input type="text" name="login" value="{{ set_value('login') }}"/></label>
 			{{ form_error('login') }}
 
-			<label for="pass">Mot de passe</label>
-			<input type="password" name="pass" value="{{ set_value('pass') }}"/>
+			<label for="pass">Mot de passe
+			<input type="password" name="pass" value="{{ set_value('pass') }}"/></label>
 			{{ form_error('pass') }}
 
-			<label for="pass2">Confirmation de mot de passe</label>
-			<input type="password" name="pass2" value="{{ set_value('pass2') }}"/>
+			<label for="pass2">Confirmation de mot de passe
+			<input type="password" name="pass2" value="{{ set_value('pass2') }}"/></label>
 			{{ form_error('pass2') }}
 
 			<label>Tranche d'âge
@@ -28,8 +28,8 @@
 				{{ form_error('catego_age') }}
 			</label>
 
-			<label for="code_postal">Code postal</label>
-			<input type="text" name="code_postal" value="{{ set_value('code_postal') }}"/>
+			<label for="code_postal">Code postal
+			<input type="text" name="code_postal" value="{{ set_value('code_postal') }}"/></label>
 			{{ form_error('code_postal') }}
 
 			<div class="checkbox">

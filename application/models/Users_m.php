@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
 /**
  * Created by IntelliJ IDEA.
@@ -6,6 +6,8 @@
  * Date: 05/05/2017
  * Time: 11:08
  */
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Users_m extends CI_Model {
 
 	public function verif_connexion($donnees) {
@@ -15,7 +17,6 @@ class Users_m extends CI_Model {
 		$this->db->where('PSEUDO', $donnees['login']);
 		$this->db->where('MOT_DE_PASSE', $donnees['pass']);
 		$query  = $this->db->get();
-		$result = $query->result();
 
 		return (!empty($query)) ? $query->row_array() : false;
 	}
