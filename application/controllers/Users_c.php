@@ -29,12 +29,12 @@ class Users_c extends CI_Controller {
 		$this->twig->display('index', array('titre' => "Page d'accueil"));
 	}
 
-	public function disp_connexion() {
+	public function connexion($donnees = array()) {
 		$this->check_isConnected();
 
-		$this->twig->display('form_connexion', array(
+		$this->twig->display('form_connexion', array_merge($donnees, array(
 			'titre' => "Page de connexion"
-		));
+		)));
 	}
 
 	public function form_valid_connexion() {
@@ -53,10 +53,10 @@ class Users_c extends CI_Controller {
 		} else {
 			if (($donnees_session = $this->Users_m->verif_connexion($donnees)) != False) {
 				$this->session->set_userdata($donnees_session);
-				redirect('Users_c');
+				redirect(base_url());
 			} else {
 				$donnees['erreur'] = "Pseudo ou mot de passe incorrect";
-				$this->twig->display('form_connexion', $donnees);
+				$this->connexion($donnees);
 			}
 		}
 	}
@@ -101,7 +101,7 @@ class Users_c extends CI_Controller {
 	}
 
 	public function verif_categoAge($age) {
-		if ($age > 0 && $age <= 3) return TRUE;
+		if ($age > 0 && $age < count($this->Users_m->getCategorieAgeDropdown())) return TRUE;
 
 		$this->form_validation->set_message('verif_categoAge', 'La %s n\'est pas définie');
 		return FALSE;
