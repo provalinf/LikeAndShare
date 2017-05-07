@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+{% block contenu %}
+	<br/>
+	<div class="row">
+
+		<table>
+			<caption>Liste des utilisateurs</caption>
+			<thead>
+			<tr>
+				<th>Login</th>
+				{% if globlogin is not empty %}
+					<th>Tranche d'âge</th>
+				{% endif %}
+				<th>Code postal</th>
+			</tr>
+			</thead>
+			<tbody>
+
+			{% for user in users_list %}
+				<tr>
+					<td>{{ user.PSEUDO }}</td>
+					{% if globlogin is not empty %}
+						<td>{{ user.CATEGORIE_AGE }}</td>
+					{% endif %}
+					<td>{{ user.CODE_POSTAL }}</td>
+				</tr>
+			{% endfor %}
+
+			</tbody>
+		</table>
+		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+	</div>
+
+
+{% endblock %}

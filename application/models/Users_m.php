@@ -39,4 +39,10 @@ class Users_m extends CI_Model {
 		$this->db->insert('UTILISATEUR', $data);
 	}
 
+	public function getListeUtilisateurs() {
+		$this->db->from('UTILISATEUR');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 }

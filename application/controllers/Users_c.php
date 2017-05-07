@@ -107,4 +107,10 @@ class Users_c extends CI_Controller {
 		return FALSE;
 	}
 
+	public function liste_utilisateurInscrit() {
+		$this->twig->display('users_list', array(
+			'titre' => "Liste des utilisateurs", 'users_list' => $this->Users_m->getListeUtilisateurs()
+		));
+	}
+
 }
