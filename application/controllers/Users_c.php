@@ -22,7 +22,7 @@ class Users_c extends CI_Controller {
 	}
 
 	private function check_isConnected() {
-		if (!empty($this->session->userdata('login'))) redirect(base_url());
+		if (empty($this->session->userdata('login'))) redirect(base_url());
 	}
 
 	public function index() {
@@ -40,7 +40,7 @@ class Users_c extends CI_Controller {
 	public function form_valid_connexion() {
 		$this->check_isConnected();
 
-		$this->form_validation->set_rules('login', 'login', 'trim|required');
+		$this->form_validation->set_rules('login', 'Login', 'trim|required');
 		$this->form_validation->set_rules('pass', 'Mot de passe', 'trim|required');
 
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');

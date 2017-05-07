@@ -22,7 +22,7 @@ class Medias_c extends CI_Controller {
 	}
 
     private function showList() {
-        if (!empty($this->session->userdata('login'))) redirect(base_url());
+        if (empty($this->session->userdata('login'))) redirect(base_url());
     }
 
 	public function index() {

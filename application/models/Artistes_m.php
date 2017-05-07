@@ -16,4 +16,8 @@ class Artistes_m extends CI_Model {
 		return $query->result();
 	}
 
+	public function addArtiste($donnees) {
+		$this->db->insert('ARTISTE', array_change_key_case($donnees, CASE_UPPER));
+	}
+
 }
