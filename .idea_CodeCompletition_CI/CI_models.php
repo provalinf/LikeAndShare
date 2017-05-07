@@ -12,6 +12,7 @@
  * <examples>
  *
  * @property Users_m $Users_m
+ * @property Artistes_m $Artistes_m
  *
  *
  *

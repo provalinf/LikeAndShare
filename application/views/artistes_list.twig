@@ -1,0 +1,38 @@
+{% extends "layout.twig" %}
+{% block contenu %}
+	<br/>
+	<div class="row">
+
+		<table>
+			<caption>Liste des artistes et auteurs</caption>
+			<thead>
+			<tr>
+				<th>Nom d'artiste</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% if artistes_list %}
+				{% for artiste in artistes_list %}
+					<tr>
+						<td>{{ artiste.NOM_ARTISTE }}</td>
+						<td>{{ artiste.NOM }}</td>
+						<td>{{ artiste.PRENOM }}</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td colspan="3">Aucun artiste enregistré</td>
+				</tr>
+			{% endif %}
+
+
+			</tbody>
+		</table>
+		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+	</div>
+
+
+{% endblock %}
