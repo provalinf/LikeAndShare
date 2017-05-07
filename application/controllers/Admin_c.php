@@ -13,7 +13,7 @@ class Admin_c extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('twig');
-		$this->load->helper(array('url'));
+		$this->load->helper(array('url', 'prev_page'));
 		$this->load->library(array('session'));
 		//$this->load->model('Users_m');
 
@@ -31,5 +31,7 @@ class Admin_c extends CI_Controller {
 		/*$this->twig->display('index', array('titre' => "Page d'accueil"));*/
 		echo "Administration";
 	}
+
+
 
 }

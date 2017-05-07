@@ -15,16 +15,22 @@
 			</tr>
 			</thead>
 			<tbody>
-
-			{% for user in users_list %}
+			{% if users_list %}
+				{% for user in users_list %}
+					<tr>
+						<td>{{ user.PSEUDO }}</td>
+						{% if globlogin is not empty %}
+							<td>{{ user.CATEGORIE_AGE }}</td>
+						{% endif %}
+						<td>{{ user.CODE_POSTAL }}</td>
+					</tr>
+				{% endfor %}
+			{% else %}
 				<tr>
-					<td>{{ user.PSEUDO }}</td>
-					{% if globlogin is not empty %}
-						<td>{{ user.CATEGORIE_AGE }}</td>
-					{% endif %}
-					<td>{{ user.CODE_POSTAL }}</td>
+					<td colspan="{{ globlogin is empty ? '2': '3' }}">Aucun utilisateur enregistré</td>
 				</tr>
-			{% endfor %}
+			{% endif %}
+
 
 			</tbody>
 		</table>

@@ -13,7 +13,7 @@ class Users_c extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('twig');
-		$this->load->helper(array('url'));
+		$this->load->helper(array('url', 'prev_page'));
 		$this->load->library(array('session', 'form_validation'));
 		$this->load->model('Users_m');
 
