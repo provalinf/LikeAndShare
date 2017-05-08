@@ -20,4 +20,12 @@ class Artistes_m extends CI_Model {
 		$this->db->insert('ARTISTE', array_change_key_case($donnees, CASE_UPPER));
 	}
 
+	public function getTitresMusicaux() {
+		//$this->db->select('*'); <= Inutile si rien dans le select
+		$this->db->from('MEDIA');
+		$this->db->join('TITRE_MUSICAL', 'MEDIA.TITRE = TITRE_MUSICAL.TITRE AND MEDIA.TITRE=TITRE_MUSICAL.TITRE');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 }
