@@ -22,7 +22,7 @@ class Users_c extends CI_Controller {
 	}
 
 	private function check_isConnected() {
-		if (empty($this->session->userdata('login'))) redirect(base_url());
+		if (!empty($this->session->userdata('login'))) redirect(base_url());
 	}
 
 	public function index() {
