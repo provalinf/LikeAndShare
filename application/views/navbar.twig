@@ -14,6 +14,16 @@
 			<li>{{ anchor('Users_c/liste_utilisateurInscrit', 'Liste des utilisateurs' ) }}</li>
 			<li class="divider"></li>
 			<li class="has-dropdown">
+				<a href="#">Artistes</a>
+				<ul class="dropdown">
+					<li>{{ anchor('Artistes_c', 'Liste des artistes' ) }}</li>
+					{% if globlogin is not empty %}
+						<li>{{ anchor('Artistes_c/addArtiste', 'Ajouter un artiste' ) }}</li>
+					{% endif %}
+				</ul>
+			</li>
+			<li class="divider"></li>
+			<li class="has-dropdown">
 				<a href="#">Documentations</a>
 				<ul class="dropdown">
 					<li>{{ anchor('https://twig.sensiolabs.org/doc/1.x', "Twig", {'target': '_blank'}) }}</li>

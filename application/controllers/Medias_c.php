@@ -27,6 +27,7 @@ class Medias_c extends CI_Controller {
     }
 
 	public function index() {
+		/*$this->twig->display('index', array('titre' => "Page d'accueil"));*/
 		echo "Administration";
 	}
 
