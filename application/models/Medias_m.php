@@ -19,7 +19,7 @@ class Medias_m extends CI_Model {
     public function getTitresMusicaux() {
         $this->db->select('*');
         $this->db->from('MEDIA');
-        $this->db->join('TITRE_MUSICAL', 'MEDIA.TITRE = TITRE_MUSICAL.TITRE');
+        $this->db->join('TITRE_MUSICAL', 'MEDIA.TITRE = TITRE_MUSICAL.TITRE AND MEDIA.NOM_ARTISTE = TITRE_MUSICAL.NOM_ARTISTE');
         $query = $this->db->get();
         return $query->result();
     }
@@ -27,7 +27,7 @@ class Medias_m extends CI_Model {
     public function getLivres() {
         $this->db->select('*');
         $this->db->from('MEDIA');
-        $this->db->join('LIVRE', 'MEDIA.TITRE = LIVRE.TITRE');
+        $this->db->join('LIVRE', 'MEDIA.TITRE = LIVRE.TITRE AND MEDIA.NOM_ARTISTE = LIVRE.NOM_ARTISTE');
         $query = $this->db->get();
         return $query->result();
     }
@@ -35,7 +35,7 @@ class Medias_m extends CI_Model {
     public function getFilms() {
         $this->db->select('*');
         $this->db->from('MEDIA');
-        $this->db->join('FILM', 'MEDIA.TITRE = FILM.TITRE');
+        $this->db->join('FILM', 'MEDIA.TITRE = FILM.TITRE AND MEDIA.NOM_ARTISTE = FILM.NOM_ARTISTE');
         $query = $this->db->get();
         return $query->result();
     }
