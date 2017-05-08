@@ -68,7 +68,6 @@ class Users_c extends CI_Controller {
 
 	public function inscription($donnees = array()) {
 		$this->check_isConnected();
-
 		$this->twig->display('form_inscription', array_merge($donnees, array(
 			'titre' => "Page d'inscription", 'liste_categoAge' => $this->Users_m->getCategorieAgeDropdown()
 		)));

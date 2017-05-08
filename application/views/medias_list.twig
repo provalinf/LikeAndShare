@@ -1,0 +1,98 @@
+{% extends "layout.twig" %}
+{% block contenu %}
+	<br/>
+	<div class="row">
+
+		<table>
+			<caption>Titres musicaux</caption>
+			<thead>
+			<tr>
+				<th>Artiste principal</th>
+				<th>Titre</th>
+				<th>Durée min</th>
+				<th>Genre</th>
+				<th>Type album</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% if musiques_list %}
+				{% for media in musiques_list %}
+					<tr>
+						<td>{{ media.NOM_ARTISTE }}</td>
+						<td>{{ media.TITRE }}</td>
+						<td>{{ media.DUREE }}</td>
+						<td>{{ media.GENRE_MUSICAL }}</td>
+						<td>{{ media.TYPE_ALBUM }}</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td colspan="{{ globlogin is empty ? '2': '3' }}">Aucun titre muscial enregistré</td>
+				</tr>
+			{% endif %}
+
+
+			</tbody>
+		</table>
+
+		<table>
+			<caption>Films</caption>
+			<thead>
+			<tr>
+				<th>Artiste principal</th>
+				<th>Titre</th>
+				<th>Genre cinéma</th>
+			</tr>
+			</thead>
+			<tbody>
+            {% if films_list %}
+                {% for media in films_list %}
+					<tr>
+						<td>{{ media.NOM_ARTISTE }}</td>
+						<td>{{ media.TITRE }}</td>
+						<td>{{ media.GENRE_CINEMA }}</td>
+					</tr>
+                {% endfor %}
+            {% else %}
+				<tr>
+					<td colspan="{{ globlogin is empty ? '2': '3' }}">Aucun film enregistré</td>
+				</tr>
+            {% endif %}
+
+
+			</tbody>
+		</table>
+
+		<table>
+			<caption>Livres</caption>
+			<thead>
+			<tr>
+				<th>Artiste principal</th>
+				<th>Titre</th>
+				<th>Genre littéraire</th>
+			</tr>
+			</thead>
+			<tbody>
+            {% if livres_list %}
+                {% for media in livres_list %}
+					<tr>
+						<td>{{ media.NOM_ARTISTE }}</td>
+						<td>{{ media.TITRE }}</td>
+						<td>{{ media.GENRE_LITTERAIRE }}</td>
+					</tr>
+                {% endfor %}
+            {% else %}
+				<tr>
+					<td colspan="{{ globlogin is empty ? '2': '3' }}">Aucun titre muscial enregistré</td>
+				</tr>
+            {% endif %}
+
+
+			</tbody>
+		</table>
+		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+	</div>
+
+
+{% endblock %}
