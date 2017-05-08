@@ -15,14 +15,15 @@ class Medias_c extends CI_Controller {
 		$this->load->library('twig');
 		$this->load->helper(array('url'));
 		$this->load->library(array('session'));
-		//$this->load->model('Users_m');
-
-		$this->twig->addGlobal('globlogin', $this->session->userdata('login'));
-		$this->twig->addGlobal('globadmin', $this->session->userdata('admin'));
+        $this->load->model('Medias_m');
 	}
 
-    private function showList() {
-        if (empty($this->session->userdata('login'))) redirect(base_url());
+    public function liste_Medias() {
+        $this->twig->display('medias_list', array(
+            'titre' => "Liste des médias", 'musiques_list' => $this->Medias_m->getTitresMusicaux(),
+            'livres_list' =>  $this->Medias_m->getLivres(),
+            'films_list' =>  $this->Medias_m->getFilms()
+        ));
     }
 
 	public function index() {
