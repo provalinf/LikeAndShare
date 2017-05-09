@@ -15,7 +15,7 @@ class Admin_c extends CI_Controller {
 		$this->load->library('twig');
 		$this->load->helper(array('url', 'prev_page'));
 		$this->load->library(array('session'));
-		//$this->load->model('Users_m');
+        $this->load->model('Admin_m');
 
 		$this->twig->addGlobal('globlogin', $this->session->userdata('login'));
 		$this->twig->addGlobal('globadmin', $this->session->userdata('admin'));
@@ -27,8 +27,14 @@ class Admin_c extends CI_Controller {
 		if ($this->session->userdata('admin') != 1) redirect(base_url());
 	}
 
+	public function lance_Stats(){
+        $this->twig->display('statistiques', array(
+            'stat' => "Statistiques ", 'statistiques' => $this->Admin_m->refreshStats()
+        ));
+    }
+
+
 	public function index() {
-		/*$this->twig->display('index', array('titre' => "Page d'accueil"));*/
 		echo "Administration";
 	}
 
