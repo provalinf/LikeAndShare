@@ -1,23 +1,25 @@
 {% extends "layout.twig" %}
 {% block contenu %}
+	<br/>
 	<div class="row">
+		<h4>{{ titre }}</h4>
 		<div class="panel">
 			{{ form_open('Artistes_c/validFormAddArtiste') }}
 
 			<label for="nom_artiste">Nom d'artiste
-			<input type="text" name="nom_artiste" value="{{ set_value('nom_artiste') }}"/></label>
+				<input type="text" name="nom_artiste" value="{{ set_value('nom_artiste') }}"/></label>
 			{{ form_error('nom_artiste') }}
 
 			<label for="nom">Nom
-			<input type="text" name="nom" value="{{ set_value('nom') }}"/></label>
+				<input type="text" name="nom" value="{{ set_value('nom') }}"/></label>
 			{{ form_error('nom') }}
 
 			<label for="prenom">Prénom
-			<input type="text" name="prenom" value="{{ set_value('prenom') }}"/></label>
+				<input type="text" name="prenom" value="{{ set_value('prenom') }}"/></label>
 			{{ form_error('prenom') }}
 
-			<input class="button small success" type="submit" value="Ajouter"/>
-			<input class="button small secondary" type="reset" value="Réinitialiser">
+			<input class="button small success" style="margin-bottom: 0;" type="submit" value="Ajouter"/>
+			<input class="button small secondary" style="margin-bottom: 0;" type="reset" value="Réinitialiser">
 
 			{{ form_close() }}
 		</div>

@@ -7,11 +7,15 @@
 	<section class="top-bar-section">
 		<ul class="left">
 			<li class="divider"></li>
-			<li>{{ anchor('Medias_c/liste_Medias', 'Liste des médias' ) }}</li>
-			<li class="divider"></li>
-			<li>{{ anchor('Medias_c/addMedia', 'Ajouter un médias' ) }}</li>
-			<li class="divider"></li>
-			<li>{{ anchor('Users_c/liste_utilisateurInscrit', 'Liste des utilisateurs' ) }}</li>
+			<li class="has-dropdown">
+				<a href="#">Médias</a>
+				<ul class="dropdown">
+					<li>{{ anchor('Medias_c/liste_Medias', 'Liste des médias' ) }}</li>
+					{% if globlogin is not empty %}
+						<li>{{ anchor('Medias_c/addMedia', 'Ajouter un médias' ) }}</li>
+					{% endif %}
+				</ul>
+			</li>
 			<li class="divider"></li>
 			<li class="has-dropdown">
 				<a href="#">Artistes</a>
@@ -22,6 +26,8 @@
 					{% endif %}
 				</ul>
 			</li>
+			<li class="divider"></li>
+			<li>{{ anchor('Users_c/liste_utilisateurInscrit', 'Liste des utilisateurs' ) }}</li>
 			<li class="divider"></li>
 			<li class="has-dropdown">
 				<a href="#">Documentations</a>

@@ -28,4 +28,21 @@ class Artistes_m extends CI_Model {
 		return $query->result();
 	}
 
+	public function getListeAuteur() {
+		$result         = $this->db->select("NOM_ARTISTE")->from("ARTISTE")->get();
+		$liste_dropDown = array();
+		if ($result->num_rows() > 0) {
+			$liste_dropDown[''] = '--';
+			foreach ($result->result_array() as $row) {
+				$liste_dropDown[$row['NOM_ARTISTE']] = $row['NOM_ARTISTE'];
+			}
+		}
+		return $liste_dropDown;
+	}
+
+	public function check_isExist($artist) {
+		$this->db->from('ARTISTE')->where('NOM_ARTISTE', $artist);
+		return $this->db->get()->num_rows() == 1;
+	}
+
 }

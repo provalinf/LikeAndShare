@@ -3,26 +3,66 @@
 	<div class="row">
 		<br/>
 		{% if type %}
-			<h4>{{ titre }}</h4>
+			<h4>{{ titre }} ({{ list_typeMedia[type] }})</h4>
 
 			<div class="panel">
-				{{ form_open('Media_c/validFormAddMedia/'~type) }}
+				{{ form_open('Medias_c/validFormAddMedia/'~type) }}
 
-				<label for="titre">Titre
-					<input type="text" name="titre" value="{{ set_value('titre') }}"/></label>
-				{{ form_error('titre') }}
+				<label for="titre_media">Titre
+					<input type="text" name="titre_media" value="{{ set_value('titre_media') }}"/></label>
+				{{ form_error('titre_media') }}
 
-				<label for="nom_auteur">Auteur principal
-					<input type="text" name="nom_auteur" value="{{ set_value('nom_auteur') }}"/></label>
-				{{ form_error('nom_auteur') }}
+				<label>Auteur principal
+					<select name="nom_auteur">
+						{% for key,value in list_auteurs %}
+							<option value="{{ key }}"
+									{% if nom_auteur is defined and nom_auteur == key %}selected="selected" {% endif %} >
+								{{ value }}
+							</option>
+						{% endfor %}
+					</select>
+					{{ form_error('nom_auteur') }}
+				</label>
+
+				<label>Auteur secondaire (facultatif)
+					<select name="nom_auteurSec">
+						{% for key,value in list_auteurs %}
+							<option value="{{ key }}"
+									{% if nom_auteurSec is defined and nom_auteurSec == key %}selected="selected" {% endif %} >
+								{{ value }}
+							</option>
+						{% endfor %}
+					</select>
+					{{ form_error('nom_auteurSec') }}
+				</label>
+
+				<label>Role de l'auteur secondaire
+					<select name="roleArtSec">
+						{% for key,value in list_roleArtSec %}
+							<option value="{{ key }}"
+									{% if roleArtSec is defined and roleArtSec == key %}selected="selected" {% endif %} >
+								{{ value }}
+							</option>
+						{% endfor %}
+					</select>
+					{{ form_error('roleArtSec') }}
+				</label>
 
 				<label for="annee">Année d'édition
 					<input type="text" name="annee" value="{{ set_value('annee') }}"/></label>
 				{{ form_error('annee') }}
 
-				<label for="langue">Langue du média
-					<input type="text" name="langue" value="{{ set_value('langue') }}"/></label>
-				{{ form_error('langue') }}
+				<label>Langue du média
+					<select name="langue">
+						{% for key,value in list_langueMedia %}
+							<option value="{{ key }}"
+									{% if langue is defined and langue == key %}selected="selected" {% endif %} >
+								{{ value }}
+							</option>
+						{% endfor %}
+					</select>
+					{{ form_error('langue') }}
+				</label>
 
 				<label for="editeur">Éditeur
 					<input type="text" name="editeur" value="{{ set_value('editeur') }}"/></label>
@@ -33,28 +73,63 @@
 						<input type="text" name="duree" value="{{ set_value('duree') }}"/></label>
 					{{ form_error('duree') }}
 
-					<label for="genre">Genre musical
-						<input type="text" name="genre" value="{{ set_value('genre') }}"/></label>
-					{{ form_error('genre') }}
+					<label>Genre musical
+						<select name="genre">
+							{% for key,value in list_genreMusical %}
+								<option value="{{ key }}"
+										{% if genre is defined and genre == key %}selected="selected" {% endif %} >
+									{{ value }}
+								</option>
+							{% endfor %}
+						</select>
+						{{ form_error('genre') }}
+					</label>
 
-					<label for="type_albm">Type d'album
-						<input type="text" name="type_albm" value="{{ set_value('type_albm') }}"/></label>
-					{{ form_error('type_albm') }}
+					<label>Type d'album
+						<select name="type_albm">
+							{% for key,value in list_typeAlbum %}
+								<option value="{{ key }}"
+										{% if type_albm is defined and type_albm == key %}selected="selected" {% endif %} >
+									{{ value }}
+								</option>
+							{% endfor %}
+						</select>
+						{{ form_error('type_albm') }}
+					</label>
+
 
 				{% elseif type == 2 %} {#Livre#}
-					<label for="genre">Genre littéraire
-						<input type="text" name="genre" value="{{ set_value('genre') }}"/></label>
-					{{ form_error('genre') }}
+					<label>Genre littéraire
+						<select name="genre">
+							{% for key,value in list_genreLitteraire %}
+								<option value="{{ key }}"
+										{% if genre is defined and genre == key %}selected="selected" {% endif %} >
+									{{ value }}
+								</option>
+							{% endfor %}
+						</select>
+						{{ form_error('genre') }}
+					</label>
+
 
 				{% elseif type == 3 %} {#Film#}
-					<label for="genre">Genre cinématographique
-						<input type="text" name="genre" value="{{ set_value('genre') }}"/></label>
-					{{ form_error('genre') }}
+					<label>Genre cinématographique
+						<select name="genre">
+							{% for key,value in list_genreCinemato %}
+								<option value="{{ key }}"
+										{% if genre is defined and genre == key %}selected="selected" {% endif %} >
+									{{ value }}
+								</option>
+							{% endfor %}
+						</select>
+						{{ form_error('genre') }}
+					</label>
 
 				{% endif %}
 
 				<input class="button small success" type="submit" value="Ajouter"/>
 				<input class="button small secondary" type="reset" value="Réinitialiser">
+				{{ anchor('Medias_c/AddMedia/', 'Retour', {'class':'button small alert'}) }}
 
 				{{ form_close() }}
 			</div>
@@ -62,11 +137,19 @@
 			<h4>Quel type de média souhaitez-vous ajouter ?</h4>
 
 			<div class="panel">
-				{{ form_open('Media_c/AddMedia/'~type) }}
+				{{ form_open('Medias_c/AddMedia/'~type) }}
 
-				<label for="type_media">Type de média
-					<input type="text" name="type_media" value="{{ set_value('type_media') }}"/></label>
-				{{ form_error('type_media') }}
+				<label>Type de média
+					<select name="type_media">
+						{% for key,value in list_typeMedia %}
+							<option value="{{ key }}"
+									{% if type_media is defined and type_media == key %}selected="selected" {% endif %} >
+								{{ value }}
+							</option>
+						{% endfor %}
+					</select>
+					{{ form_error('type_media') }}
+				</label>
 
 				<input class="button small success" style="margin-bottom: 0;" type="submit" value="Sélectionner"/>
 				{{ form_close() }}

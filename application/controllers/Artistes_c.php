@@ -35,7 +35,7 @@ class Artistes_c extends CI_Controller {
 		$this->check_isConnected();
 
 		$this->twig->display('form_addArtiste', array_merge($donnees, array(
-			'Titre' => 'Ajouter un artiste ou auteur'
+			'titre' => 'Ajouter un artiste/auteur'
 		)));
 	}
 
