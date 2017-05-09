@@ -69,11 +69,11 @@ class Medias_c extends CI_Controller {
 		}
 
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
-		$this->form_validation->set_rules('titre_media', 'Titre', 'trim|required|max_length[100]');
 		$this->form_validation->set_rules('nom_auteur', 'Auteur principal', 'trim|required|callback_verifArtiste');
+		$this->form_validation->set_rules('titre_media', 'Titre', "trim|required|max_length[100]|callback_verifUniqueMedia[{$this->input->post('nom_auteur')}]");
 		$this->form_validation->set_rules('nom_auteurSec', 'Auteur secondaire', "trim|callback_verifArtisteSec[{$this->input->post('nom_auteur')}]");
 		$this->form_validation->set_rules('roleArtSec', 'Role de l\'auteur secondaire', "trim|numeric|callback_verifRoleArtSecond[{$this->input->post('nom_auteurSec')}]");
-		$this->form_validation->set_rules('annee', 'Année d\'édition', 'trim|required|numeric|exact_length[4]');
+		$this->form_validation->set_rules('annee', 'Année d\'édition', 'trim|required|numeric|exact_length[4]|callback_verifAnnee');
 		$this->form_validation->set_rules('langue', 'Langue du média', 'trim|required|numeric|is_natural_no_zero|callback_verifLangue');
 		$this->form_validation->set_rules('editeur', 'Éditeur', 'trim|required|max_length[100]');
 
@@ -129,6 +129,15 @@ class Medias_c extends CI_Controller {
 		return false;
 	}
 
+	public function verifUniqueMedia($titre, $artiste) {
+		if (!$this->Medias_m->check_isExist($titre, $artiste)) {
+			return true;
+		}
+
+		$this->form_validation->set_message('verifUniqueMedia', 'Le média est déjà répertorié !');
+		return false;
+	}
+
 	public function verifArtisteSec($artistesec, $artistePr) {
 		if (empty($artistesec)) return true;
 		if ($this->Artistes_m->check_isExist($artistesec) && $artistesec != $artistePr) {
@@ -148,6 +157,13 @@ class Medias_c extends CI_Controller {
 		return FALSE;
 	}
 
+	public function verifAnnee($annee) {
+		if ($annee >= 1900 && $annee <= date('Y')) return TRUE;
+
+		$this->form_validation->set_message('verifAnnee', 'La %s doit être comprise de 1900 à ' . date('Y'));
+		return FALSE;
+	}
+
 	public function verifLangue($lang) {
 		if ($lang > 0 && $lang < count($this->Medias_m->getListeLangueMedia())) return TRUE;
 
@@ -163,11 +179,12 @@ class Medias_c extends CI_Controller {
 	}
 
 	public function verifDuree($duree) {
-		return true;
-		/*if ($genre > 0 && $genre < count($this->Medias_m->getListeGenreMusical())) return TRUE;
+		if (count(preg_split("/(?!\.?$)\d{0,3}(\.\d{0,2})?/", $duree)) <= 2) {
+			return TRUE;
+		}
 
-		$this->form_validation->set_message('verifGenreMusic', 'La %s n\'est pas définie');
-		return FALSE;*/
+		$this->form_validation->set_message('verifDuree', 'La syntaxe de la %s doit être sous la forme xxx.xx');
+		return FALSE;
 	}
 
 	public function verifTypeAlbum($type) {

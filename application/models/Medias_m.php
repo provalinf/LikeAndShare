@@ -156,4 +156,9 @@ class Medias_m extends CI_Model {
 		$this->db->insert("AUTRE_AUTEUR", $donnees);
 	}
 
+	public function check_isExist($titre, $artiste) {
+		$this->db->from('MEDIA')->where('TITRE', $titre)->where('NOM_ARTISTE', $artiste);
+		return $this->db->get()->num_rows() == 1;
+	}
+
 }
