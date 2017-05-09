@@ -2,38 +2,39 @@
 {% block contenu %}
 	<br/>
 	<div class="row">
-
-		<table>
-			<caption>Liste des utilisateurs</caption>
-			<thead>
-			<tr>
-				<th>Login</th>
-				{% if globlogin is not empty %}
-					<th>Tranche d'âge</th>
-				{% endif %}
-				<th>Code postal</th>
-			</tr>
-			</thead>
-			<tbody>
-			{% if users_list %}
-				{% for user in users_list %}
-					<tr>
-						<td>{{ user.PSEUDO }}</td>
-						{% if globlogin is not empty %}
-							<td>{{ user.CATEGORIE_AGE }}</td>
-						{% endif %}
-						<td>{{ user.CODE_POSTAL }}</td>
-					</tr>
-				{% endfor %}
-			{% else %}
+		<div style="display: block; text-align: -webkit-center;">
+			<table>
+				<caption>Liste des utilisateurs</caption>
+				<thead>
 				<tr>
-					<td colspan="{{ globlogin is empty ? '2': '3' }}">Aucun utilisateur enregistré</td>
+					<th>Login</th>
+					{% if globlogin is not empty %}
+						<th>Tranche d'âge</th>
+					{% endif %}
+					<th>Code postal</th>
 				</tr>
-			{% endif %}
+				</thead>
+				<tbody>
+				{% if users_list %}
+					{% for user in users_list %}
+						<tr>
+							<td>{{ user.PSEUDO }}</td>
+							{% if globlogin is not empty %}
+								<td>{{ user.CATEGORIE_AGE }}</td>
+							{% endif %}
+							<td>{{ user.CODE_POSTAL }}</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr>
+						<td colspan="{{ globlogin is empty ? '2': '3' }}">Aucun utilisateur enregistré</td>
+					</tr>
+				{% endif %}
 
 
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
 		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 
 	</div>

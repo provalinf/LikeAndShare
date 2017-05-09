@@ -1,25 +1,76 @@
 {% extends "layout.twig" %}
 {% block contenu %}
 	<div class="row">
-		<div class="panel">
-			{{ form_open('Media_c/validFormAddMedia') }}
+		<br/>
+		{% if type %}
+			<h4>{{ titre }}</h4>
 
-			<label for="nom_artiste">Nom d'artiste
-			<input type="text" name="nom_artiste" value="{{ set_value('nom_artiste') }}"/></label>
-			{{ form_error('nom_artiste') }}
+			<div class="panel">
+				{{ form_open('Media_c/validFormAddMedia/'~type) }}
 
-			<label for="nom">Nom
-			<input type="text" name="nom" value="{{ set_value('nom') }}"/></label>
-			{{ form_error('nom') }}
+				<label for="titre">Titre
+					<input type="text" name="titre" value="{{ set_value('titre') }}"/></label>
+				{{ form_error('titre') }}
 
-			<label for="prenom">Prénom
-			<input type="text" name="prenom" value="{{ set_value('prenom') }}"/></label>
-			{{ form_error('prenom') }}
+				<label for="nom_auteur">Auteur principal
+					<input type="text" name="nom_auteur" value="{{ set_value('nom_auteur') }}"/></label>
+				{{ form_error('nom_auteur') }}
 
-			<input class="button small success" type="submit" value="Ajouter"/>
-			<input class="button small secondary" type="reset" value="Réinitialiser">
+				<label for="annee">Année d'édition
+					<input type="text" name="annee" value="{{ set_value('annee') }}"/></label>
+				{{ form_error('annee') }}
 
-			{{ form_close() }}
-		</div>
+				<label for="langue">Langue du média
+					<input type="text" name="langue" value="{{ set_value('langue') }}"/></label>
+				{{ form_error('langue') }}
+
+				<label for="editeur">Éditeur
+					<input type="text" name="editeur" value="{{ set_value('editeur') }}"/></label>
+				{{ form_error('editeur') }}
+
+				{% if type == 1 %} {#Musique#}
+					<label for="duree">Durée
+						<input type="text" name="duree" value="{{ set_value('duree') }}"/></label>
+					{{ form_error('duree') }}
+
+					<label for="genre">Genre musical
+						<input type="text" name="genre" value="{{ set_value('genre') }}"/></label>
+					{{ form_error('genre') }}
+
+					<label for="type_albm">Type d'album
+						<input type="text" name="type_albm" value="{{ set_value('type_albm') }}"/></label>
+					{{ form_error('type_albm') }}
+
+				{% elseif type == 2 %} {#Livre#}
+					<label for="genre">Genre littéraire
+						<input type="text" name="genre" value="{{ set_value('genre') }}"/></label>
+					{{ form_error('genre') }}
+
+				{% elseif type == 3 %} {#Film#}
+					<label for="genre">Genre cinématographique
+						<input type="text" name="genre" value="{{ set_value('genre') }}"/></label>
+					{{ form_error('genre') }}
+
+				{% endif %}
+
+				<input class="button small success" type="submit" value="Ajouter"/>
+				<input class="button small secondary" type="reset" value="Réinitialiser">
+
+				{{ form_close() }}
+			</div>
+		{% else %}
+			<h4>Quel type de média souhaitez-vous ajouter ?</h4>
+
+			<div class="panel">
+				{{ form_open('Media_c/AddMedia/'~type) }}
+
+				<label for="type_media">Type de média
+					<input type="text" name="type_media" value="{{ set_value('type_media') }}"/></label>
+				{{ form_error('type_media') }}
+
+				<input class="button small success" style="margin-bottom: 0;" type="submit" value="Sélectionner"/>
+				{{ form_close() }}
+			</div>
+		{% endif %}
 	</div>
 {% endblock %}

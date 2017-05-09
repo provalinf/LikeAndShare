@@ -79,7 +79,7 @@ class Users_c extends CI_Controller {
 		$this->form_validation->set_rules('pass', 'Mot de passe', 'trim|required|min_length[6]|max_length[12]');
 		$this->form_validation->set_rules('pass2', 'Confirmation de mot de passe', 'trim|required|matches[pass]');
 		$this->form_validation->set_rules('code_postal', 'Code postal', 'trim|required|numeric|min_length[5]|max_length[5]');
-		$this->form_validation->set_rules('catego_age', 'Catégorie d\'âge', 'trim|required|callback_verif_categoAge');
+		$this->form_validation->set_rules('catego_age', 'Catégorie d\'âge', 'trim|required|numeric|callback_verif_categoAge');
 
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
 
