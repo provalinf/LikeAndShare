@@ -161,4 +161,57 @@ class Medias_m extends CI_Model {
 		return $this->db->get()->num_rows() == 1;
 	}
 
+    public function scrobbler($titre, $artiste, $login){
+        $donnees   = array(
+            'TITRE'            => $titre, 'NOM_ARTISTE' => $artiste,
+            'PSEUDO' => $login
+        );
+        $this->db->insert("SCROBBLING", $donnees);
+    }
+
+    public function getScrobArtisteSemaine(){
+        $this->db->from('V_SCROB_ARTISTE_SEMAINE');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getScrobMediaSemaine(){
+        $this->db->from('V_SCROB_MEDIA_SEMAINE');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getScrobArtiste(){
+        $this->db->from('V_SCROB_ARTISTE');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getScrobMedia(){
+        $this->db->from('V_SCROB_MEDIA');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getStatArtisteSemaine(){
+        $this->db->from('V_STAT_ARTISTE_SEMAINE');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getStatMediaSemaine(){
+        $this->db->from('V_STAT_MEDIA_SEMAINE');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getStatArtiste(){
+        $this->db->from('V_STAT_ARTISTE');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getStatMedia(){
+        $this->db->from('V_STAT_MEDIA');
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

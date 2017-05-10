@@ -12,6 +12,7 @@
 					<th>Durée min</th>
 					<th>Genre</th>
 					<th>Type album</th>
+					<th>Scrobbler</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -23,6 +24,7 @@
 							<td>{{ media.DUREE }}</td>
 							<td>{{ media.GENRE_MUSICAL }}</td>
 							<td>{{ media.TYPE_ALBUM }}</td>
+							<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'scrobbler', {'class':'button tiny radius info'}) }}</td>
 						</tr>
 					{% endfor %}
 				{% else %}
@@ -44,6 +46,7 @@
 					<th>Artiste principal</th>
 					<th>Titre</th>
 					<th>Genre cinématographique</th>
+					<th>Scrobbler</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -53,6 +56,7 @@
 							<td>{{ media.NOM_ARTISTE }}</td>
 							<td>{{ media.TITRE }}</td>
 							<td>{{ media.GENRE_CINEMA }}</td>
+							<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'scrobbler', {'class':'button tiny radius info'}) }}</td>
 						</tr>
 					{% endfor %}
 				{% else %}
@@ -74,6 +78,7 @@
 					<th>Artiste principal</th>
 					<th>Titre</th>
 					<th>Genre littéraire</th>
+					<th>Scrobbler</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -83,6 +88,7 @@
 							<td>{{ media.NOM_ARTISTE }}</td>
 							<td>{{ media.TITRE }}</td>
 							<td>{{ media.GENRE_LITTERAIRE }}</td>
+							<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'scrobbler', {'class':'button tiny radius info'}) }}</td>
 						</tr>
 					{% endfor %}
 				{% else %}

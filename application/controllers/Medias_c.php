@@ -13,7 +13,7 @@ class Medias_c extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('twig');
-		$this->load->helper(array('url'));
+		$this->load->helper(array('url','prev_page'));
 		$this->load->library(array('session', 'form_validation'));
 		$this->load->model(array('Medias_m', 'Artistes_m'));
 
@@ -207,5 +207,34 @@ class Medias_c extends CI_Controller {
 		$this->form_validation->set_message('verifGenreCinemat', 'La %s n\'est pas définie');
 		return FALSE;
 	}
+
+    public function scrobbler($titre, $artiste) {
+        if (!$this->Medias_m->check_isExist($titre, $artiste)) {
+            return;
+        }
+        $this->Medias_m->scrobbler($titre, $artiste, $this->session->userdata('login'));
+        redirect_back();
+    }
+
+    public function afficherStatsSemaine(){
+        $this->twig->display('scrobbleSemaine', array(
+            'titre' => "Statistiques Semaine",
+            'statArtisteSemaine' => $this->Medias_m->getStatArtisteSemaine(),
+            'statMediaSemaine' => $this->Medias_m->getStatMediaSemaine(),
+            'scrobArtisteSemaine' => $this->Medias_m->getScrobArtisteSemaine(),
+            'scrobMediaSemaine' => $this->Medias_m->getScrobMediaSemaine()
+        ));
+    }
+
+    public function afficherStats(){
+        $this->twig->display('scrobble', array(
+            'titre' => "Statistiques globales",
+            'statArtiste' => $this->Medias_m->getStatArtiste(),
+            'statMedia' => $this->Medias_m->getStatMedia(),
+            'scrobArtiste' => $this->Medias_m->getScrobArtiste(),
+            'scrobMedia' => $this->Medias_m->getScrobMedia()
+        ));
+    }
+
 
 }

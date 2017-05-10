@@ -17,7 +17,13 @@
 				</ul>
 			</li>
 			<li class="divider"></li>
-			<li>{{ anchor('Admin_c/lance_Stats', 'Statistiques' ) }}</li>
+			<li class="has-dropdown">
+				<a href="#">Statistiques</a>
+				<ul class="dropdown">
+					<li>{{ anchor('Medias_c/afficherStatsSemaine', 'Statistiques de la semaine' ) }}</li>
+					<li>{{ anchor('Medias_c/afficherStats', 'Statistiques globales' ) }}</li>
+				</ul>
+			</li>
 			<li class="divider"></li>
 			<li class="has-dropdown">
 				<a href="#">Artistes</a>

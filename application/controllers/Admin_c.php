@@ -27,13 +27,6 @@ class Admin_c extends CI_Controller {
 		if ($this->session->userdata('admin') != 1) redirect(base_url());
 	}
 
-	public function lance_Stats(){
-        $this->twig->display('statistiques', array(
-            'stat' => "Statistiques ", 'statistiques' => $this->Admin_m->refreshStats()
-        ));
-    }
-
-
 	public function index() {
 		echo "Administration";
 	}

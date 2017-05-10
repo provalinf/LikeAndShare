@@ -1,0 +1,134 @@
+{% extends "layout.twig" %}
+{% block contenu %}
+	<br/>
+	<div class="row">
+		<div style="display: block; text-align: -webkit-center;">
+			<table>
+				<caption>Scrobbles d'artistes cette semaine</caption>
+				<thead>
+				<tr>
+					<th>Nom d'artiste</th>
+					<th>Titre</th>
+					<th>Numéro semaine</th>
+					<th>Année</th>
+					<th>Nombre scrobbles semaine</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% if scrobArtisteSemaine %}
+					{% for stat in scrobArtisteSemaine %}
+						<tr>
+							<td>{{ stat.NOM_ARTISTE }}</td>
+							<td>{{ stat.TITRE }}</td>
+							<td>{{ stat.NUM_SEMAINE }}</td>
+							<td>{{ stat.ANNEE }}</td>
+							<td>{{ stat.NB_SCROB_SEMAINE }}</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr>
+						<td colspan="5">Aucun scrobble d'artiste cette semaine</td>
+					</tr>
+				{% endif %}
+				</tbody>
+			</table>
+
+
+			<table>
+				<caption>Scrobbles des médias cette semaine</caption>
+				<thead>
+				<tr>
+					<th>Nom d'artiste</th>
+					<th>Titre</th>
+					<th>Numéro semaine</th>
+					<th>Année</th>
+					<th>Nombre scrobbles semaine</th>
+				</tr>
+				</thead>
+				<tbody>
+                {% if scrobMediaSemaine %}
+                    {% for stat in scrobMediaSemaine %}
+						<tr>
+							<td>{{ stat.NOM_ARTISTE }}</td>
+							<td>{{ stat.TITRE }}</td>
+							<td>{{ stat.NUM_SEMAINE }}</td>
+							<td>{{ stat.ANNEE }}</td>
+							<td>{{ stat.NB_SCROB_SEMAINE }}</td>
+						</tr>
+                    {% endfor %}
+                {% else %}
+					<tr>
+						<td colspan="5">Aucun scrobble de médias cette semaine</td>
+					</tr>
+                {% endif %}
+				</tbody>
+			</table>
+
+			<table>
+				<caption>Statistiques d'artistes cette semaine</caption>
+				<thead>
+				<tr>
+					<th>Pseudo</th>
+					<th>Nom d'artiste</th>
+					<th>Numéro de la semaine</th>
+					<th>Année</th>
+					<th>Nombre scrobbles semaine</th>
+				</tr>
+				</thead>
+				<tbody>
+                {% if statArtisteSemaine %}
+                    {% for stat in statArtisteSemaine %}
+						<tr>
+							<td>{{ stat.PSEUDO }}</td>
+							<td>{{ stat.NOM_ARTISTE }}</td>
+							<td>{{ stat.NUM_SEMAINE }}</td>
+							<td>{{ stat.ANNEE }}</td>
+							<td>{{ stat.NB_SCROB_SEMAINE }}</td>
+						</tr>
+                    {% endfor %}
+                {% else %}
+					<tr>
+						<td colspan="5">Aucune statistique d'artiste cette semaine</td>
+					</tr>
+                {% endif %}
+				</tbody>
+			</table>
+
+			<table>
+				<caption>Scrobble médias cette semaine</caption>
+				<thead>
+				<tr>
+					<th>Pseudo</th>
+					<th>Nom d'artiste</th>
+					<th>Titre</th>
+					<th>Numéro de la semaine</th>
+					<th>Année</th>
+					<th>Nombre scrobbles semaine</th>
+				</tr>
+				</thead>
+				<tbody>
+                {% if scrobMediaSemaine %}
+                    {% for stat in scrobMediaSemaine %}
+						<tr>
+							<td>{{ stat.PSEUDO }}</td>
+							<td>{{ stat.NOM_ARTISTE }}</td>
+							<td>{{ stat.TITRE }}</td>
+							<td>{{ stat.NUM_SEMAINE }}</td>
+							<td>{{ stat.ANNEE }}</td>
+							<td>{{ stat.NB_SCROB_SEMAINE }}</td>
+						</tr>
+                    {% endfor %}
+                {% else %}
+					<tr>
+						<td colspan="6">Aucune statistique de média cette semaine</td>
+					</tr>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+	</div>
+
+
+{% endblock %}

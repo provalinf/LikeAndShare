@@ -1,0 +1,116 @@
+{% extends "layout.twig" %}
+{% block contenu %}
+	<br/>
+	<div class="row">
+		<div style="display: block; text-align: -webkit-center;">
+			<table>
+				<caption>Scrobbles d'artistes</caption>
+				<thead>
+				<tr>
+					<th>Nom d'artiste</th>
+					<th>Nombre de scrobbles</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% if scrobArtiste %}
+					{% for scrob in scrobArtiste %}
+						<tr>
+							<td>{{ scrob.NOM_ARTISTE }}</td>
+							<td>{{ scrob.NB_SCROB_TOTAL }}</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr>
+						<td colspan="2">Aucun scrobble d'artiste</td>
+					</tr>
+				{% endif %}
+				</tbody>
+			</table>
+
+
+			<table>
+				<caption>Scrobbles des médias</caption>
+				<thead>
+				<tr>
+					<th>Nom d'artiste</th>
+					<th>Titre</th>
+					<th>Nombre scrobbles</th>
+				</tr>
+				</thead>
+				<tbody>
+                {% if scrobMedia %}
+                    {% for scrob in scrobMedia %}
+						<tr>
+							<td>{{ scrob.NOM_ARTISTE }}</td>
+							<td>{{ scrob.TITRE }}</td>
+							<td>{{ scrob.NB_SCROB_TOTAL }}</td>
+						</tr>
+                    {% endfor %}
+                {% else %}
+					<tr>
+						<td colspan="3">Aucun scrobble de médias</td>
+					</tr>
+                {% endif %}
+				</tbody>
+			</table>
+
+			<table>
+				<caption>Statistiques des artistes </caption>
+				<thead>
+				<tr>
+					<th>Pseudo</th>
+					<th>Nom d'artiste</th>
+					<th>Nombre scrobble</th>
+				</tr>
+				</thead>
+				<tbody>
+                {% if statArtiste %}
+                    {% for stat in statArtiste %}
+						<tr>
+							<td>{{ stat.PSEUDO }}</td>
+							<td>{{ stat.NOM_ARTISTE }}</td>
+							<td>{{ stat.NB_SCROB_TOTAL }}</td>
+						</tr>
+                    {% endfor %}
+                {% else %}
+					<tr>
+						<td colspan="3">Aucune statistique d'artiste</td>
+					</tr>
+                {% endif %}
+				</tbody>
+			</table>
+
+			<table>
+				<caption>Statistiques des médias</caption>
+				<thead>
+				<tr>
+					<th>Pseudo</th>
+					<th>Nom d'artiste</th>
+					<th>Titre</th>
+					<th>Nombre scrobbles</th>
+				</tr>
+				</thead>
+				<tbody>
+                {% if statMedia %}
+                    {% for stat in statMedia %}
+						<tr>
+							<td>{{ stat.PSEUDO }}</td>
+							<td>{{ stat.NOM_ARTISTE }}</td>
+							<td>{{ stat.TITRE }}</td>
+							<td>{{ stat.NB_SCROB_TOTAL }}</td>
+						</tr>
+                    {% endfor %}
+                {% else %}
+					<tr>
+						<td colspan="4">Aucune statistique de média</td>
+					</tr>
+                {% endif %}
+				</tbody>
+			</table>
+		</div>
+		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
+	</div>
+
+
+{% endblock %}
