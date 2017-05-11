@@ -9,4 +9,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin_m extends CI_Model {
+    public function genererStatSemaine(){
+        return $this->db->insert('SEMAINE', array(
+            'NUM_SEMAINE'=>date('W'),
+            'ANNEE'=>date('Y')
+        ));
+    }
 }

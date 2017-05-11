@@ -28,8 +28,15 @@ class Admin_c extends CI_Controller {
 	}
 
 	public function index() {
-		echo "Administration";
+        $this->twig->display('adminControl',array(
+            'titre'=>'adminControl'
+        ));
 	}
+
+	public function genererStat(){
+	    $this->Admin_m->genererStatSemaine();
+	    redirect_back();
+    }
 
 
 

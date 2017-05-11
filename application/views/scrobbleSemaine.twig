@@ -8,7 +8,6 @@
 				<thead>
 				<tr>
 					<th>Nom d'artiste</th>
-					<th>Titre</th>
 					<th>Numéro semaine</th>
 					<th>Année</th>
 					<th>Nombre scrobbles semaine</th>
@@ -19,7 +18,6 @@
 					{% for stat in scrobArtisteSemaine %}
 						<tr>
 							<td>{{ stat.NOM_ARTISTE }}</td>
-							<td>{{ stat.TITRE }}</td>
 							<td>{{ stat.NUM_SEMAINE }}</td>
 							<td>{{ stat.ANNEE }}</td>
 							<td>{{ stat.NB_SCROB_SEMAINE }}</td>
@@ -27,7 +25,7 @@
 					{% endfor %}
 				{% else %}
 					<tr>
-						<td colspan="5">Aucun scrobble d'artiste cette semaine</td>
+						<td colspan="4">Aucun scrobble d'artiste cette semaine</td>
 					</tr>
 				{% endif %}
 				</tbody>
@@ -98,7 +96,6 @@
 				<caption>Scrobble médias cette semaine</caption>
 				<thead>
 				<tr>
-					<th>Pseudo</th>
 					<th>Nom d'artiste</th>
 					<th>Titre</th>
 					<th>Numéro de la semaine</th>
@@ -110,7 +107,6 @@
                 {% if scrobMediaSemaine %}
                     {% for stat in scrobMediaSemaine %}
 						<tr>
-							<td>{{ stat.PSEUDO }}</td>
 							<td>{{ stat.NOM_ARTISTE }}</td>
 							<td>{{ stat.TITRE }}</td>
 							<td>{{ stat.NUM_SEMAINE }}</td>
@@ -120,7 +116,7 @@
                     {% endfor %}
                 {% else %}
 					<tr>
-						<td colspan="6">Aucune statistique de média cette semaine</td>
+						<td colspan="5">Aucune statistique de média cette semaine</td>
 					</tr>
                 {% endif %}
 				</tbody>

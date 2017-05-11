@@ -12,6 +12,7 @@
  * <examples>
  *
  * @property Users_m $Users_m
+ * @property Admin_m $Admin_m
  * @property Artistes_m $Artistes_m
  * @property Medias_m $Medias_m
  *
