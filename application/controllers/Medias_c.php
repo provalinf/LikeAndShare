@@ -22,7 +22,7 @@ class Medias_c extends CI_Controller {
 	}
 
 	private function check_isConnected() {
-		if (empty($this->session->userdata('login'))) redirect('Medias_c');
+		if (empty($this->session->userdata('login'))) redirect('c=Medias_c');
 	}
 
 	public function index() {
@@ -42,6 +42,7 @@ class Medias_c extends CI_Controller {
 	}
 
 	public function addMedia($type = -1, $donnees = array()) {
+		$type = $this->input->get('type');
 		$this->check_isConnected();
 
 		if ($type == -1) {
@@ -74,11 +75,13 @@ class Medias_c extends CI_Controller {
 		return FALSE;
 	}
 
-	public function validFormAddMedia($type) {
+	public function validFormAddMedia($type = null) {
+		$type = $this->input->get('type');
+
 		$this->check_isConnected();
 
 		if ($type < 1 || $type > count($this->Medias_m->getTypesMedia())) {
-			redirect('Medias_c/addMedia');
+			redirect('c=Medias_c&m=addMedia');
 		}
 
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
@@ -128,7 +131,7 @@ class Medias_c extends CI_Controller {
 			}
 
 			$this->Medias_m->add_media($donnees, $type);
-			redirect('Medias_c');
+			redirect('c=Medias_c');
 		}
 
 	}
@@ -224,8 +227,8 @@ class Medias_c extends CI_Controller {
 	public function scrobbler($titre, $artiste) {
 		$this->check_isConnected();
 
-		if (!$this->Medias_m->check_mediaIsExist($titre, $artiste)) redirect('Medias_c');
-		if ($this->Medias_m->check_scrobbleJourExiste($titre, $artiste, $this->session->userdata('login'))) redirect('Medias_c');
+		if (!$this->Medias_m->check_mediaIsExist($titre, $artiste)) redirect('c=Medias_c');
+		if ($this->Medias_m->check_scrobbleJourExiste($titre, $artiste, $this->session->userdata('login'))) redirect('c=Medias_c');
 		$this->Medias_m->scrobbler($titre, $artiste, $this->session->userdata('login'));
 		redirect_back();
 	}

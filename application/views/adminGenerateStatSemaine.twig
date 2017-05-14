@@ -7,9 +7,9 @@
 			: {#{{ dump(last_generate) }}#} {% if last_generate %}{{ 'semaine '~last_generate.NUM_SEMAINE~', année '~last_generate.ANNEE }}
 			{% else %}aucune{% endif %}</p>
 		{% if not last %}
-			{{ anchor("Admin_c/genererStat", "Générer",{'class':'button small'}) }}
+			{{ anchor("c=Admin_c&m=genererStat", "Générer",{'class':'button small'}) }}
 		{% else %}
-			{{ anchor('Admin_c/#', 'Générer', {'class':'button small secondary','disabled':''}) }}
+			{{ anchor('c=Admin_c', 'Générer', {'class':'button small secondary','disabled':''}) }}
 		{% endif %}
 	</div>
 {% endblock %}

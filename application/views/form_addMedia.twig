@@ -6,7 +6,7 @@
 			<h4>{{ titre }} ({{ list_typeMedia[type] }})</h4>
 
 			<div class="panel">
-				{{ form_open('Medias_c/validFormAddMedia/'~type) }}
+				{{ form_open('c=Medias_c&m=validFormAddMedia&type='~type) }}
 
 				<label for="titre_media">Titre
 					<input type="text" name="titre_media" value="{{ set_value('titre_media') }}"/></label>
@@ -129,7 +129,7 @@
 
 				<input class="button small success" type="submit" value="Ajouter"/>
 				<input class="button small secondary" type="reset" value="Réinitialiser">
-				{{ anchor('Medias_c/AddMedia/', 'Retour', {'class':'button small alert'}) }}
+				{{ anchor('c=Medias_c&m=addMedia', 'Retour', {'class':'button small alert'}) }}
 
 				{{ form_close() }}
 			</div>
@@ -137,7 +137,7 @@
 			<h4>Quel type de média souhaitez-vous ajouter ?</h4>
 
 			<div class="panel">
-				{{ form_open('Medias_c/AddMedia/'~type) }}
+				{{ form_open('c=Medias_c&m=addMedia&type='~type) }}
 
 				<label>Type de média
 					<select name="type_media">

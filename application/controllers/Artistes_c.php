@@ -22,7 +22,7 @@ class Artistes_c extends CI_Controller {
 	}
 
 	private function check_isConnected() {
-		if (empty($this->session->userdata('login'))) redirect('Artistes_c');
+		if (empty($this->session->userdata('login'))) redirect('c=Artistes_c');
 	}
 
 	public function index() {
@@ -57,7 +57,7 @@ class Artistes_c extends CI_Controller {
 			$this->addArtiste($donnees);
 		} else {
 			$this->Artistes_m->addArtiste($donnees);
-			redirect('Artistes_c');
+			redirect('c=Artistes_c');
 		}
 	}
 

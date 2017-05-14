@@ -10,9 +10,9 @@
 			<li class="has-dropdown">
 				<a href="#">Médias</a>
 				<ul class="dropdown">
-					<li>{{ anchor('Medias_c/liste_Medias', 'Liste des médias' ) }}</li>
+					<li>{{ anchor('c=Medias_c&m=liste_Medias', 'Liste des médias' ) }}</li>
 					{% if globlogin is not empty %}
-						<li>{{ anchor('Medias_c/addMedia', 'Ajouter un média' ) }}</li>
+						<li>{{ anchor('c=Medias_c&m=addMedia', 'Ajouter un média' ) }}</li>
 					{% endif %}
 				</ul>
 			</li>
@@ -20,22 +20,22 @@
 			<li class="has-dropdown">
 				<a href="#">Statistiques</a>
 				<ul class="dropdown">
-					<li>{{ anchor('Medias_c/afficherStatsSemaine', 'Statistiques de la semaine' ) }}</li>
-					<li>{{ anchor('Medias_c/afficherStats', 'Statistiques globales' ) }}</li>
+					<li>{{ anchor('c=Medias_c&m=afficherStatsSemaine', 'Statistiques de la semaine' ) }}</li>
+					<li>{{ anchor('c=Medias_c&m=afficherStats', 'Statistiques globales' ) }}</li>
 				</ul>
 			</li>
 			<li class="divider"></li>
 			<li class="has-dropdown">
 				<a href="#">Artistes</a>
 				<ul class="dropdown">
-					<li>{{ anchor('Artistes_c', 'Liste des artistes' ) }}</li>
+					<li>{{ anchor('c=Artistes_c', 'Liste des artistes' ) }}</li>
 					{% if globlogin is not empty %}
-						<li>{{ anchor('Artistes_c/addArtiste', 'Ajouter un artiste' ) }}</li>
+						<li>{{ anchor('c=Artistes_c&m=addArtiste', 'Ajouter un artiste' ) }}</li>
 					{% endif %}
 				</ul>
 			</li>
 			<li class="divider"></li>
-			<li>{{ anchor('Users_c/liste_utilisateurInscrit', 'Liste des utilisateurs' ) }}</li>
+			<li>{{ anchor('c=Users_c&m=liste_utilisateurInscrit', 'Liste des utilisateurs' ) }}</li>
 			<li class="divider"></li>
 			<li class="has-dropdown">
 				<a href="#">Documentations</a>
@@ -49,14 +49,14 @@
 		<ul class="right">
 
 			{% if globlogin is empty %}
-				<li class="active">{{ anchor('Users_c/connexion', 'Connexion' ) }}</li>
+				<li class="active">{{ anchor('c=Users_c&m=connexion', 'Connexion' ) }}</li>
 				<li class="divider"></li>
-				<li>{{ anchor('Users_c/inscription', 'Inscription') }}</li>
+				<li>{{ anchor('c=Users_c&m=inscription', 'Inscription') }}</li>
 			{% else %}
 				{% if globadmin == 1 %}
-					<li class="active">{{ anchor('Admin_c', 'Administration' ) }}</li>
+					<li class="active">{{ anchor('c=Admin_c', 'Administration' ) }}</li>
 				{% endif %}
-				<li>{{ anchor('Users_c/deconnexion', 'Déconnexion ['~globlogin~']' ) }}</li>
+				<li>{{ anchor('c=Users_c&m=deconnexion', 'Déconnexion ['~globlogin~']' ) }}</li>
 			{% endif %}
 		</ul>
 	</section>
