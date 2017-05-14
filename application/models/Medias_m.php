@@ -153,65 +153,75 @@ class Medias_m extends CI_Model {
 	}
 
 	private function add_AuteurSec($donnees) {
-		$this->db->insert("AUTRE_AUTEUR", $donnees);
+		return $this->db->insert("AUTRE_AUTEUR", $donnees);
 	}
 
-	public function check_isExist($titre, $artiste) {
+	public function check_mediaIsExist($titre, $artiste) {
 		$this->db->from('MEDIA')->where('TITRE', $titre)->where('NOM_ARTISTE', $artiste);
 		return $this->db->get()->num_rows() == 1;
 	}
 
-    public function scrobbler($titre, $artiste, $login){
-        $donnees   = array(
-            'TITRE'            => $titre, 'NOM_ARTISTE' => $artiste,
-            'PSEUDO' => $login
-        );
-        $this->db->insert("SCROBBLING", $donnees);
-    }
+	public function scrobbler($titre, $artiste, $login) {
+		if ($this->check_scrobbleJourExiste($titre, $artiste, $login)) return false;
+		$donnees = array(
+			'TITRE' => $titre, 'NOM_ARTISTE' => $artiste, 'PSEUDO' => $login
+		);
+		return $this->db->insert("SCROBBLING", $donnees);
+	}
 
-    public function getScrobArtisteSemaine(){
-        $this->db->from('V_SCROB_ARTISTE_SEMAINE');
-        $query = $this->db->get();
-        return $query->result();
-    }
-    public function getScrobMediaSemaine(){
-        $this->db->from('V_SCROB_MEDIA_SEMAINE');
-        $query = $this->db->get();
-        return $query->result();
-    }
+	public function check_scrobbleJourExiste($titre, $artiste, $login) {
+		$donnees = array(
+			'TITRE' => $titre, 'NOM_ARTISTE' => $artiste, 'PSEUDO' => $login, "to_char(DATE_SCROBBLING,'YYYY-MM-DD')" => date('Y-m-d')
+		);
+		$this->db->from('SCROBBLING')->where($donnees);
+		return $this->db->get()->num_rows() == 1;
+	}
 
-    public function getScrobArtiste(){
-        $this->db->from('V_SCROB_ARTISTE');
-        $query = $this->db->get();
-        return $query->result();
-    }
+	public function getScrobArtisteSemaine() {
+		$this->db->from('V_SCROB_ARTISTE_SEMAINE');
+		$query = $this->db->get();
+		return $query->result();
+	}
 
-    public function getScrobMedia(){
-        $this->db->from('V_SCROB_MEDIA');
-        $query = $this->db->get();
-        return $query->result();
-    }
+	public function getScrobMediaSemaine() {
+		$this->db->from('V_SCROB_MEDIA_SEMAINE');
+		$query = $this->db->get();
+		return $query->result();
+	}
 
-    public function getStatArtisteSemaine(){
-        $this->db->from('V_STAT_ARTISTE_SEMAINE');
-        $query = $this->db->get();
-        return $query->result();
-    }
-    public function getStatMediaSemaine(){
-        $this->db->from('V_STAT_MEDIA_SEMAINE');
-        $query = $this->db->get();
-        return $query->result();
-    }
+	public function getScrobArtiste() {
+		$this->db->from('V_SCROB_ARTISTE');
+		$query = $this->db->get();
+		return $query->result();
+	}
 
-    public function getStatArtiste(){
-        $this->db->from('V_STAT_ARTISTE');
-        $query = $this->db->get();
-        return $query->result();
-    }
+	public function getScrobMedia() {
+		$this->db->from('V_SCROB_MEDIA');
+		$query = $this->db->get();
+		return $query->result();
+	}
 
-    public function getStatMedia(){
-        $this->db->from('V_STAT_MEDIA');
-        $query = $this->db->get();
-        return $query->result();
-    }
+	public function getStatArtisteSemaine() {
+		$this->db->from('V_STAT_ARTISTE_SEMAINE');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getStatMediaSemaine() {
+		$this->db->from('V_STAT_MEDIA_SEMAINE');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getStatArtiste() {
+		$this->db->from('V_STAT_ARTISTE');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getStatMedia() {
+		$this->db->from('V_STAT_MEDIA');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

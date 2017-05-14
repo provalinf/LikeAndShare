@@ -28,8 +28,8 @@ class Admin_c extends CI_Controller {
 	}
 
 	public function index() {
-        $this->twig->display('adminControl',array(
-            'titre'=>'adminControl'
+        $this->twig->display('adminGenerateStatSemaine',array(
+            'titre'=>'adminControl', 'last_generate' => $this->Admin_m->getLastGenerationStat(), 'last'=>$this->Admin_m->check_isSemaineGenerate()
         ));
 	}
 

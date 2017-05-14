@@ -13,7 +13,7 @@ class Medias_c extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('twig');
-		$this->load->helper(array('url','prev_page'));
+		$this->load->helper(array('url', 'prev_page', 'date'));
 		$this->load->library(array('session', 'form_validation'));
 		$this->load->model(array('Medias_m', 'Artistes_m'));
 
@@ -21,11 +21,20 @@ class Medias_c extends CI_Controller {
 		$this->twig->addGlobal('globadmin', $this->session->userdata('admin'));
 	}
 
+	private function check_isConnected() {
+		if (empty($this->session->userdata('login'))) redirect('Medias_c');
+	}
+
 	public function index() {
 		$this->liste_Medias();
 	}
 
 	public function liste_Medias() {
+		$filter = new Twig_SimpleFunction('deja_scrobble', function($titre_media, $nom_artiste){
+			return $this->Medias_m->check_scrobbleJourExiste($titre_media, $nom_artiste, $this->session->userdata('login'));
+
+		});
+		$this->twig->getTwig()->addFunction($filter);
 		$this->twig->display('medias_list', array(
 			'titre'       => "Liste des médias", 'musiques_list' => $this->Medias_m->getTitresMusicaux(),
 			'livres_list' => $this->Medias_m->getLivres(), 'films_list' => $this->Medias_m->getFilms()
@@ -33,6 +42,8 @@ class Medias_c extends CI_Controller {
 	}
 
 	public function addMedia($type = -1, $donnees = array()) {
+		$this->check_isConnected();
+
 		if ($type == -1) {
 			$type = 0;
 		} else {
@@ -64,6 +75,8 @@ class Medias_c extends CI_Controller {
 	}
 
 	public function validFormAddMedia($type) {
+		$this->check_isConnected();
+
 		if ($type < 1 || $type > count($this->Medias_m->getTypesMedia())) {
 			redirect('Medias_c/addMedia');
 		}
@@ -130,7 +143,7 @@ class Medias_c extends CI_Controller {
 	}
 
 	public function verifUniqueMedia($titre, $artiste) {
-		if (!$this->Medias_m->check_isExist($titre, $artiste)) {
+		if (!$this->Medias_m->check_mediaIsExist($titre, $artiste)) {
 			return true;
 		}
 
@@ -208,33 +221,32 @@ class Medias_c extends CI_Controller {
 		return FALSE;
 	}
 
-    public function scrobbler($titre, $artiste) {
-        if (!$this->Medias_m->check_isExist($titre, $artiste)) {
-            return;
-        }
-        $this->Medias_m->scrobbler($titre, $artiste, $this->session->userdata('login'));
-        redirect_back();
-    }
+	public function scrobbler($titre, $artiste) {
+		$this->check_isConnected();
 
-    public function afficherStatsSemaine(){
-        $this->twig->display('scrobbleSemaine', array(
-            'titre' => "Statistiques Semaine",
-            'statArtisteSemaine' => $this->Medias_m->getStatArtisteSemaine(),
-            'statMediaSemaine' => $this->Medias_m->getStatMediaSemaine(),
-            'scrobArtisteSemaine' => $this->Medias_m->getScrobArtisteSemaine(),
-            'scrobMediaSemaine' => $this->Medias_m->getScrobMediaSemaine()
-        ));
-    }
+		if (!$this->Medias_m->check_mediaIsExist($titre, $artiste)) redirect('Medias_c');
+		if ($this->Medias_m->check_scrobbleJourExiste($titre, $artiste, $this->session->userdata('login'))) redirect('Medias_c');
+		$this->Medias_m->scrobbler($titre, $artiste, $this->session->userdata('login'));
+		redirect_back();
+	}
 
-    public function afficherStats(){
-        $this->twig->display('scrobble', array(
-            'titre' => "Statistiques globales",
-            'statArtiste' => $this->Medias_m->getStatArtiste(),
-            'statMedia' => $this->Medias_m->getStatMedia(),
-            'scrobArtiste' => $this->Medias_m->getScrobArtiste(),
-            'scrobMedia' => $this->Medias_m->getScrobMedia()
-        ));
-    }
+	public function afficherStatsSemaine() {
+		$this->twig->display('scrobbleSemaine', array(
+			'titre'               => "Statistiques Semaine",
+			'statArtisteSemaine'  => $this->Medias_m->getStatArtisteSemaine(),
+			'statMediaSemaine'    => $this->Medias_m->getStatMediaSemaine(),
+			'scrobArtisteSemaine' => $this->Medias_m->getScrobArtisteSemaine(),
+			'scrobMediaSemaine'   => $this->Medias_m->getScrobMediaSemaine()
+		));
+	}
+
+	public function afficherStats() {
+		$this->twig->display('scrobble', array(
+			'titre'      => "Statistiques globales", 'statArtiste' => $this->Medias_m->getStatArtiste(),
+			'statMedia'  => $this->Medias_m->getStatMedia(), 'scrobArtiste' => $this->Medias_m->getScrobArtiste(),
+			'scrobMedia' => $this->Medias_m->getScrobMedia()
+		));
+	}
 
 
 }

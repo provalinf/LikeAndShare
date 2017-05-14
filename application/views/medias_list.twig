@@ -12,7 +12,9 @@
 					<th>Durée min</th>
 					<th>Genre</th>
 					<th>Type album</th>
-					<th>Scrobbler</th>
+					{% if globlogin is not empty %}
+						<th>Scrobbler</th>
+					{% endif %}
 				</tr>
 				</thead>
 				<tbody>
@@ -24,12 +26,18 @@
 							<td>{{ media.DUREE }}</td>
 							<td>{{ media.GENRE_MUSICAL }}</td>
 							<td>{{ media.TYPE_ALBUM }}</td>
-							<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'scrobbler', {'class':'button tiny radius info'}) }}</td>
+							{% if globlogin is not empty %}
+								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
+									<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+								{% else %}
+									<td>{{ anchor('Medias_c/#','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
+								{% endif %}
+							{% endif %}
 						</tr>
 					{% endfor %}
 				{% else %}
 					<tr>
-						<td colspan="5">Aucun titre muscial enregistré</td>
+						<td colspan="{{ globlogin is empty ? '5': '6' }}">Aucun titre musical enregistré</td>
 					</tr>
 				{% endif %}
 				</tbody>
@@ -46,22 +54,29 @@
 					<th>Artiste principal</th>
 					<th>Titre</th>
 					<th>Genre cinématographique</th>
-					<th>Scrobbler</th>
+					{% if globlogin is not empty %}
+						<th>Scrobbler</th>
+					{% endif %}
 				</tr>
 				</thead>
 				<tbody>
 				{% if films_list %}
 					{% for media in films_list %}
 						<tr>
-							<td>{{ media.NOM_ARTISTE }}</td>
-							<td>{{ media.TITRE }}</td>
-							<td>{{ media.GENRE_CINEMA }}</td>
-							<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'scrobbler', {'class':'button tiny radius info'}) }}</td>
-						</tr>
+						<td>{{ media.NOM_ARTISTE }}</td>
+						<td>{{ media.TITRE }}</td>
+						<td>{{ media.GENRE_CINEMA }}</td>
+						{% if globlogin is not empty %}
+							{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
+								<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+							{% else %}
+								<td>{{ anchor('Medias_c/#','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
+							{% endif %}
+						{% endif %}
 					{% endfor %}
 				{% else %}
 					<tr>
-						<td colspan="3">Aucun film enregistré</td>
+						<td colspan="{{ globlogin is empty ? '3': '4' }}">Aucun film enregistré</td>
 					</tr>
 				{% endif %}
 				</tbody>
@@ -78,7 +93,9 @@
 					<th>Artiste principal</th>
 					<th>Titre</th>
 					<th>Genre littéraire</th>
-					<th>Scrobbler</th>
+					{% if globlogin is not empty %}
+						<th>Scrobbler</th>
+					{% endif %}
 				</tr>
 				</thead>
 				<tbody>
@@ -88,12 +105,18 @@
 							<td>{{ media.NOM_ARTISTE }}</td>
 							<td>{{ media.TITRE }}</td>
 							<td>{{ media.GENRE_LITTERAIRE }}</td>
-							<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'scrobbler', {'class':'button tiny radius info'}) }}</td>
+							{% if globlogin is not empty %}
+								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
+									<td>{{ anchor('Medias_c/scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+								{% else %}
+									<td>{{ anchor('Medias_c/#','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
+								{% endif %}
+							{% endif %}
 						</tr>
 					{% endfor %}
 				{% else %}
 					<tr>
-						<td colspan="3">Aucun titre muscial enregistré</td>
+						<td colspan="{{ globlogin is empty ? '3': '4' }}">Aucun livre enregistré</td>
 					</tr>
 				{% endif %}
 				</tbody>
