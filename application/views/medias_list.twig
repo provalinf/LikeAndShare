@@ -26,9 +26,22 @@
 							<td>{{ media.DUREE }}</td>
 							<td>{{ media.GENRE_MUSICAL }}</td>
 							<td>{{ media.TYPE_ALBUM }}</td>
-							{% if globlogin is not empty %}
+							{#{% if globlogin is not empty %}
 								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
 									<td>{{ anchor('c=Medias_c&m=scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+								{% else %}
+									<td>{{ anchor('c=Medias_c','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
+								{% endif %}
+							{% endif %}#}
+
+							{% if globlogin is not empty %} {#Magouille pour fonctionnement sans véritable ID#}
+								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
+									<td>{{ form_open('c=Medias_c&m=post_scrobbler') }}
+										<input type="hidden" name="titre" value="{{ media.TITRE }}"/>
+										<input type="hidden" name="artiste" value="{{ media.NOM_ARTISTE }}"/>
+										<input class="button tiny radius info" type="submit" value="Scrobbler"/>
+										{{ form_close() }}
+									</td>
 								{% else %}
 									<td>{{ anchor('c=Medias_c','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
 								{% endif %}
@@ -66,9 +79,22 @@
 						<td>{{ media.NOM_ARTISTE }}</td>
 						<td>{{ media.TITRE }}</td>
 						<td>{{ media.GENRE_CINEMA }}</td>
-						{% if globlogin is not empty %}
+						{#{% if globlogin is not empty %}
+								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
+									<td>{{ anchor('c=Medias_c&m=scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+								{% else %}
+									<td>{{ anchor('c=Medias_c','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
+								{% endif %}
+							{% endif %}#}
+
+						{% if globlogin is not empty %} {#Magouille pour fonctionnement sans véritable ID#}
 							{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
-								<td>{{ anchor('c=Medias_c&m=scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+								<td>{{ form_open('c=Medias_c&m=post_scrobbler') }}
+									<input type="hidden" name="titre" value="{{ media.TITRE }}"/>
+									<input type="hidden" name="artiste" value="{{ media.NOM_ARTISTE }}"/>
+									<input class="button tiny radius info" type="submit" value="Scrobbler"/>
+									{{ form_close() }}
+								</td>
 							{% else %}
 								<td>{{ anchor('c=Medias_c','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
 							{% endif %}
@@ -105,9 +131,22 @@
 							<td>{{ media.NOM_ARTISTE }}</td>
 							<td>{{ media.TITRE }}</td>
 							<td>{{ media.GENRE_LITTERAIRE }}</td>
-							{% if globlogin is not empty %}
+							{#{% if globlogin is not empty %}
 								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
 									<td>{{ anchor('c=Medias_c&m=scrobbler/'~media.TITRE~'/'~media.NOM_ARTISTE,'Scrobbler', {'class':'button tiny radius info'}) }}</td>
+								{% else %}
+									<td>{{ anchor('c=Medias_c','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
+								{% endif %}
+							{% endif %}#}
+
+							{% if globlogin is not empty %} {#Magouille pour fonctionnement sans véritable ID#}
+								{% if not deja_scrobble(media.TITRE, media.NOM_ARTISTE) %}
+									<td>{{ form_open('c=Medias_c&m=post_scrobbler') }}
+										<input type="hidden" name="titre" value="{{ media.TITRE }}"/>
+										<input type="hidden" name="artiste" value="{{ media.NOM_ARTISTE }}"/>
+										<input class="button tiny radius info" type="submit" value="Scrobbler"/>
+										{{ form_close() }}
+									</td>
 								{% else %}
 									<td>{{ anchor('c=Medias_c','Scrobbler', {'class':'button tiny radius secondary','disabled':'', 'title':"Vous ne pouvez scrobbler un même média qu'une seule fois par jour"}) }}</td>
 								{% endif %}

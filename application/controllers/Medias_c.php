@@ -224,6 +224,10 @@ class Medias_c extends CI_Controller {
 		return FALSE;
 	}
 
+	public function post_scrobbler() {
+		$this->scrobbler($this->input->post('titre'), $this->input->post('artiste'));
+	}
+
 	public function scrobbler($titre, $artiste) {
 		$this->check_isConnected();
 
